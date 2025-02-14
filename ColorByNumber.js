@@ -31,7 +31,7 @@ trackTransforms(_context);
  */
 window.addEventListener("load", function( ) {
 	let _example = new Image( );
-	_example.src = "OrangOlex/Graffiti-Gangs/ZuezLvL1.png";
+	_example.src = "ZuezLvL1.png";
 	_example.addEventListener("load", function( ) {
 		initialize(this);
 	});
@@ -49,6 +49,12 @@ window.addEventListener("resize", function( ) {
 	
 	resetTransform( );
 });
+
+function updateProgressBar() {
+    const progress = (_filledCells / _totalCells) * 100;
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = progress + "%";
+}
 
 // Tool selection
 function handleToolClick(event) {
@@ -271,6 +277,13 @@ function initialize(image) {
 	const gridWidth = width * size;
 	const gridHeight = height * size;
 
+	// Calculate total cells
+	_totalCells = width * height;
+	_filledCells = 0;
+
+	// Set default transformation and render
+	resetTransform();
+
 	// Generate grid
 	let grid = [ ];
     
@@ -467,7 +480,16 @@ function render( ) {
 function draw(x, y) {
     const squareX = Math.floor(x / size);
     const squareY = Math.floor(y / size);
+	if (coordinate.identifier === _identifier && !coordinate.fill) {
+		coordinate.fill = true;
 	
+		_context.fillStyle = _identifiers[coordinate.identifier];
+		_context.fillRect(x * size, y * size, size, size);
+	
+		// Update filled cells count and progress bar
+		_filledCells++;
+		updateProgressBar();
+	}
 	// Skip coordinates outside of the canvas
 	if(squareX < 0 || squareX > _grid.length - 1 || squareY < 0 || squareY > _grid[0].length - 1) return;
 	
