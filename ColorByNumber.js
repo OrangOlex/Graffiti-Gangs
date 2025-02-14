@@ -4,6 +4,7 @@
  */
 const scaleFactor = 1.1;
 const size = 32;
+const minScale = 0.09; // Minimum scale factor to limit zoom out
 
 let _identifier, _tool, _touch;
 
@@ -478,9 +479,15 @@ function zoom(power) {
     const point = _context.transformedPoint(lastX, lastY);
     _context.translate(point.x, point.y);
 
-    const factor = Math.pow(scaleFactor, power);
-    _context.scale(factor, factor);
+    let factor = Math.pow(scaleFactor, power);
+    const newScale = _context.getTransform().a * factor;
     
+    // Limit zoom out
+    if (newScale < minScale) {
+        factor = minScale / _context.getTransform().a;
+    }
+
+    _context.scale(factor, factor);
     _context.translate(-point.x, -point.y);
 
     render();
