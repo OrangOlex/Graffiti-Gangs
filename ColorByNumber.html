@@ -11,7 +11,13 @@
 		<p>Loading...</p>
         <img src="GGLoading.gif" alt="Welcome Image">
     </div>
-<div class="header">
+	<div id="main">
+		<button onclick="showSection('ColorByNumber')"><p>Start</p></button>
+		<button onclick="showSection('Options')"><p>Options</p></button>
+		<img src="MainScreen.png">
+	</div>
+	<div id="ColorByNumber">
+	<div class="header">
 	<div class="menu">
 		<ul class="tools">
 			<li class="tool" data-tool="pan">Pan</li>
@@ -28,6 +34,7 @@
 	<div class="menu">
 		<label class="upload" for="upload">
 			<input id="upload" type="file">
+			<button onclick="returnButton()" ontouch="returnButton()">Back</button>
 		</label>
 	</div>
 </div>
@@ -39,6 +46,10 @@
 	<div id="progress-bar" style="width: 0%; height: 30px; background-color: #4caf50;"></div>
 </div>
 <canvas id="canvas" width="800" height="800"></canvas>
+</div>
+<div id="Options">
+	
+</div>
 <script src ="ColorByNumber.js"></script>
 </body>
 </html>

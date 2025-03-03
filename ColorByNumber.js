@@ -1,3 +1,20 @@
+function showSection(sectionId) {
+    const sections = ['ColorByNumber', 'main', 'Options'];
+    sections.forEach(id => {
+        document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+    });
+}
+
+function returnButton(otherSectionId) {
+    const otherSections = ['ColorByNumber', 'main', 'Options'];
+    if (document.getElementById('main').style.display === 'none') {
+        otherSections.forEach(id => {
+            document.getElementById(id).style.display = 'none';
+        });
+        document.getElementById('main').style.display = 'block';
+    }
+}
+
 /*
  *  Variables
  *
