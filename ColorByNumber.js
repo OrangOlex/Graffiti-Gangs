@@ -580,3 +580,11 @@ function trackTransforms(context) {
         return point.matrixTransform(form.inverse());
     };
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var overlay = document.getElementById("overlay");
+    setTimeout(function() {
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+    }, 10000); // 10 seconds
+});
